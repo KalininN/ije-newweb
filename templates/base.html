@@ -1,0 +1,61 @@
+<html>
+<head>
+    <title>{% block title %}IJE &mdash; the Integrated Judjing Environment{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+<body>
+{% block body %}
+<div id="header">
+<div id="header-info" class="container">
+<span>IJE</span>
+<span>
+{% if "contest" in session %}
+{{ session["contest_name"] }}
+{% else %}
+No contest selected
+{% endif %}
+</span>
+<span>
+{% if "login" in session %}
+    {{ session["login"] }} | <a href="/logout">Выйти</a>
+{% else %}
+    <a href="/login">Войти</a>
+{% endif %}
+</span>
+</div>
+<div id="menu" class="container">
+<span><a href="/">Информация</a></span>
+<span><a href="/submit">Сдать</a></span>
+<span><a href="/monitor">Результаты</a></span>
+<span><a href="/messages">Сообщения</a></span>
+<span>
+{% if "contest" in session %}
+{{ 1|get_contest_time }}
+{% else %}
+Eternity
+{% endif %}
+</span>
+<span><a href="/choose_contest">Сменить контест</a></span>
+</div>
+</div>
+
+{% if request.args.get("error", "") %}
+<div id="error">
+Ошибка: {{ request.args.get("error", "") }}
+</div>
+{% endif %}
+
+{% if request.args.get("message", "") %}
+<div id="message">
+{{ request.args.get("message", "") }}
+</div>
+{% endif %}
+
+<div id="content">
+{% block content %}
+{% endblock %}
+</div>
+
+{% endblock %}
+</body>
+</html>

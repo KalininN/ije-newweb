@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<table id="messages">
+    <tr>
+        <th class="submission_id">Id</td>
+        <th class="time">Время</td>
+        <th class="problem">Задача</td>
+        <th class="language">Язык</td>
+        <th class="verdict">Вердикт</td>
+        <th class="test">Тест</td>
+        <th class="comment">Комментарий</td>
+    </tr>
+{% for message in messages %}
+    <tr class="message {{ message["verdict"] }}" onclick="window.location.href='/showmessage?id={{ message["id"] }}';">
+        <td class="submission_id">{{ message["id"] }}</td>
+        <td class="time">{{ message["time"]|format_time }}</td>
+        <td class="problem">{{ message["problem"] }}</td>
+        <td class="language">{{ message["language"] }}</td>
+        <td class="verdict">{{ message["verdict"] }}</td>
+        <td class="test">{{ message["test"] }}</td>
+        <td class="comment">{{ message["comment"]|shrink_comment|safe }}</td>
+    </tr>
+{% endfor %}
+</table>
+{% endblock %}

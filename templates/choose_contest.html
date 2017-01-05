@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<form action="" method="POST">
+    <select name="contest_id">
+        {% for contest in contests %}
+        <option value={{ contest["id"] }}>{{ contest["name"] }}</option>
+        {% endfor %}
+        <option value="None">Без контеста</option>
+    </select>
+    <input type="submit" value="Войти!"/>
+</form>
+{% endblock %}

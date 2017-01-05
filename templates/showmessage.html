@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div id="message_info" class="table_style">
+    <div class="submission_id"><span class="property">Id посылки:</span><span class="value">{{ message["id"] }}</span></div>
+    <div class="time"><span class="property">Время:</span><span class="value">{{ message["time"]|format_time }}</span></div>
+    <div class="problem"><span class="property">Задача:</span><span class="value">{{ message["problem"] }}</span></div>
+    <div class="language"><span class="property">Язык:</span><span class="value">{{ message["language"] }}</span></div>
+    <div class="verdict"><span class="property">Вердикт:</span><span class="value">{{ message["verdict"] }}</span></div>
+    <div class="test"><span class="property">Тест:</span><span class="value">{{ message["test"] }}</span></div>
+    <div class="comment"><span class="property">Комментарий:</span><span class="value">{{ message["comment"]|safe }}</span></div>
+</div>
+{% endblock %}

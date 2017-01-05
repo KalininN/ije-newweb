@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<table id="results">
+<tr class="header">
+    <th>id</th>
+    <th>Команда</th>
+    {% for problem in problems %}
+        <th>{{ problem["id"] }}</th>
+    {% endfor %}
+    <th>=</th>
+    <th>Штраф</th>
+    <th>Место</th>
+</tr>
+{% for team in results %}
+    <tr class="team {{ team["solved_parity"] }}" {% if "login" in session and session["login"] == team["id"] %} id="me" {% endif %}">
+        <td class="team_id">{{ team["id"] }}</td>
+        <td class="name">{{ team["name"] }}</td>
+        {% for problem in team["results"] %}
+            <td class="problem_results {{ problem["style"] }}">{{ problem["verdict"] }}</br><span class="time">{{ problem["time"]|format_time }}</span></td>
+        {% endfor %}
+        <td class="score">{{ team["solved"] }}</td>
+        <td class="penalty">{{ team["penalty"] }}</td>
+        <td class="place">{{ team["place"] }}</td>
+    </tr>
+{% endfor %}
+</div>
+{% endblock %}

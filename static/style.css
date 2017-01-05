@@ -1,0 +1,240 @@
+body {
+    width: 80%;
+    margin: auto;
+    background-color: #eeddee;
+}
+
+div.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+a:visited {
+    color: rgb(0, 0, 238);
+}
+
+#header {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    
+    background-color: #ddccdd;
+    border-radius: 0 0 10px 10px;
+}
+
+#header-info {
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid black;
+}
+
+#error {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    
+    background-color: #ffaaaa;
+    border-radius: 10px;    
+}
+
+#message {
+    width: 100%;
+    margin-bottom: 20px;
+    padding: 10px;
+    
+    background-color: #aaffaa;
+    border-radius: 10px;    
+}
+
+#content {
+    width: 100%;
+    min-height: 100%;
+    padding: 10px;
+    
+    background-color: #ddccdd;
+    border-radius: 10px 10px 0 0;
+}
+
+form select, form textarea, form input {
+    display: block;
+    margin-bottom: 5px;
+}
+
+table#messages {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 5px;
+}
+
+#messages th {
+    padding: 5px;
+}
+
+tr.message {
+    height: 50px;
+    border-bottom: 10px solid #ddccdd;
+}
+
+tr.message td {
+    padding: 5px;
+}
+
+tr.message td:last-child {
+    border-radius: 0 15px 15px 0;
+}
+
+tr.message td:first-child {
+    border-radius: 15px 0 0 15px;
+}
+
+tr.message.WA td {
+    background-color: #ffaaaa;
+}
+
+tr.message.AC td, tr.message.OK td {
+    background-color: #aaffaa;
+}
+
+tr.message.CE td {
+    background-color: #ff88dd;
+}
+
+tr.message.IL td, tr.message.ML td {
+    background-color: #ee66ff;
+}
+
+tr.message.TL td {
+    background-color: #aaaaff;
+}
+
+tr.message.PE td {
+    background-color: #77eeff;
+}
+
+tr.message:hover td {
+    cursor: pointer;
+}
+
+tr.message.WA:hover td {
+    background-color: #ffbbbb;
+}
+
+tr.message.AC:hover td, tr.message.OK:hover td {
+    background-color: #bbffbb;
+}
+
+tr.message.CE:hover td {
+    background-color: #ff99ee;
+}
+
+tr.message.IL:hover td, tr.message.ML:hover td {
+    background-color: #ff77ff;
+}
+
+tr.message.TL:hover td {
+    background-color: #bbbbff;
+}
+
+tr.message.PE:hover td {
+    background-color: #88ffff;
+}
+
+tr.message td.time, tr.message td.verdict {
+    text-align: right;
+}
+
+tr.message td.comment {
+    font-family: Courier;
+}
+
+table#results {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#results tr.team {
+    height: 40px;
+}
+
+#results #me {
+    background-color: #fbfb6f;
+}
+
+#results tr.team td {
+    vertical-align: middle;
+}
+
+#results tr.team.group_even:nth-child(odd) {
+    background-color: #c0b0c0;
+}
+
+#results tr.team.group_even:nth-child(even) {
+    background-color: #c6b6c6;
+}
+
+#results tr.team.group_odd:nth-child(odd) {
+    background-color: #d6c6d6;
+}
+
+#results tr.team.group_odd:nth-child(even) {
+    background-color: #d0c0d0;
+}
+
+#results td {
+    padding: 3px;
+}
+
+#results td.problem_results {
+    text-align: center;
+    width: 30px;
+}
+
+#results td.score {
+    font-weight: bold;
+    text-align: center;
+    width: 30px;
+}
+
+#results td.team_id, #results td.penalty, #results td.place {
+    text-align: center;
+}
+
+#results td.problem_results.AC {
+    font-weight: bold;
+    color: green;
+}
+
+#results td.problem_results.RJ {
+    color: red;
+}
+
+#results span.time {
+    font-size: 70%;
+}
+
+.table_style {
+    display: table;
+}
+
+.table_style div {
+    display: table-row;
+}
+
+.table_style .property, .table_style .value {
+    display: table-cell;
+    padding: 5px;
+}
+
+.table_style .property {
+    text-align: right;
+    font-weight: bold;
+    vertical-align: top;
+}
+
+
+h2 {
+    padding-left: 30px;
+    font-size: 150%;
+}

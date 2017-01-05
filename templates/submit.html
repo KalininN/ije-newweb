@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<form action="" method="POST" enctype=multipart/form-data >
+<div class="table_style">
+    <div><span class="property">Задача:</span><span class="value">
+    <select name="problem">
+        {% for p in problems %}
+        <option value={{ p["id"] }}>{{ p["name"] }}</option>
+        {% endfor %}
+    </select>
+    </span>
+    </div>
+    <div><span class="property">Язык:</span><span class="value">
+    <select name="language">
+        {% for l in languages %}
+        <option value={{ l["id"] }}>{{ l["name"] }}</option>
+        {% endfor %}
+    </select>
+    </span>
+    </div>
+    <div><span class="property">Исходный код:</span><span class="value"><textarea name="source_textarea" cols=100 rows=30></textarea></span></div>
+    <div><span class="property">Или файл с исходным кодом:</span><span class="value"><input type=file name="source_file"/></span></div>
+    <div><span class="property"></span><span class="value"><input type="submit" value="Отослать!"/></span></div>
+</div>
+</form>
+{% endblock %}
