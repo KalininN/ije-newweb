@@ -7,7 +7,7 @@
     <div class="language"><span class="property">Язык:</span><span class="value">{{ message["language"] }}</span></div>
     <div class="verdict"><span class="property">Вердикт:</span><span class="value">{{ message["verdict"] }}</span></div>
     <div class="test"><span class="property">Тест:</span><span class="value">{{ message["test"] }}</span></div>
-    <div class="comment"><span class="property">Комментарий:</span><span class="value">{{ message["comment"]|htmlsafe|escape }}</span></div>
-    <div class="source_code"><span class="property">Исходный код:</span><span class="value">{{ source|htmlsafe|escape }}</span></div>
+    <div class="comment"><span class="property">Комментарий:</span><span class="value">{{ message["comment"]|escape|htmlsafe }}</span></div>
+    <div class="source_code"><span class="property">Исходный код:</span><span class="value">{{ source|escape|htmlsafe }}</span></div>
 </div>
 {% endblock %}
