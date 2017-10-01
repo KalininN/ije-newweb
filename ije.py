@@ -7,6 +7,8 @@ from flask import session, redirect, url_for, escape, request
 
 import xml.etree.ElementTree as ET
 
+from settings import *
+
 
 def parse_xml(filename):
     tree = ET.parse(filename)
@@ -15,7 +17,7 @@ def parse_xml(filename):
 
 def get_contest_config():
     if "contest" in session:
-        return parse_xml(session["contest"] + ".xml")
+        return parse_xml(os.path.join(IJE_PATH, session["contest"] + ".xml"))
     else:
         return None
 
@@ -66,20 +68,32 @@ to_short_verdict = {
 def get_messages():
     contest_xml = get_contest_config()
     submits_xml = parse_xml(os.path.join(CONFIG_PATHS["results_dir"], contest_xml.attrib["submits"]))
+    show_comment = contest_xml.get("showcomment") == "true"
+    show_test = contest_xml.get("showtest") == "true"
     submits = []
     for submit_xml in submits_xml.iter("submit"):
         if submit_xml.attrib["party"] == session["login"]:
             comment = submit_xml.attrib["comment"]
-            comment = comment.replace("\n", "</br>")
-            comment = comment.replace(" ", "&nbsp;")
+            test = submit_xml.get("test")
+            if not show_comment and submit_xml.get("outcome") != "compilation-error":
+                comment = ""
+            if not show_test or test == "0":
+                test = ""
             submits.append({"problem": submit_xml.attrib["problem"], "id": int(submit_xml.attrib["id"]),
                             "time": int(submit_xml.attrib["time"]), "verdict": to_short_verdict[submit_xml.attrib["outcome"]],
                             "comment": comment, "language": submit_xml.attrib["language-id"],
-                            "test": submit_xml.attrib["test"]})
+                            "test": test})
     submits = sorted(submits, key=itemgetter("time"), reverse=True)
     return submits
     #return [{"problem": "01.A", "id": "5", "time": 55, "verdict": "WA", "comment": "2nd nummbers differ"},
             #{"problem": "01.B", "id": "5", "time": 65, "verdict": "AC", "comment": ""}]
+
+
+def get_contest_time():
+    contest_xml = get_contest_config()
+    results_xml = parse_xml(os.path.join(CONFIG_PATHS["results_dir"], contest_xml.attrib["monitor"]))
+    time = results_xml.attrib["time"]
+    return time
 
 
 def can_view_monitor():
@@ -143,8 +157,8 @@ def contests_list():
     contests = []
     for contest_xml in contests_xml.iter("acm-contest"):
         config_path = contest_xml.attrib["settings"]
-        config_xml = parse_xml(config_path)
-        contests.append({"id": config_path[:-4], "name": config_xml.attrib["title"], "config_path": config_path})
+        config_xml = parse_xml(os.path.join(IJE_PATH, config_path))
+        contests.append({"id": config_path[:-4], "name": config_xml.attrib["title"], "config_path": os.path.join(IJE_PATH, config_path)})
     return contests
 
 
@@ -183,18 +197,29 @@ def languages_list():
     #return [{"id": "cpp", "name": "C++"}, {"id": "pas", "name": "Pascal"}]
 
 
-def get_filename(problem):
-    return "submit.txt"
+def replace_pattern(pattern, c, fill):
+    need_len = pattern.count(c)
+    if len(fill) < need_len:
+        fill = "0" * (need_len - len(fill)) + fill
+    if len(fill) > need_len:
+        fill = fill[(len(fill) - need_len):]
+    return pattern.replace(c * need_len, fill)
 
 
-config = {
-    "SUBMITS_FOLDER": "."
-}
+def get_filename(problem, language):
+    ije_xml = parse_xml(CONFIG_PATHS["ije"])
+    pattern = ije_xml.get("solutions-format")
+    pattern = replace_pattern(pattern, "@", session["login"])
+    pattern = replace_pattern(pattern, "#", problem.split(".")[0])
+    pattern = replace_pattern(pattern, "$", problem.split(".")[1])
+    return os.path.join(CONFIG_PATHS["solutions_dir"], pattern + "." + language)
 
 
-CONFIG_PATHS = {
-    "contests": "acm.xml",
-    "results_dir": "results",
-    "submits_dir": "sols_acm_reg",
-    "ije": "ije_cfg.xml"
-}
+def get_submission_source(problem, submission_id, time, language):
+    filename = "{}_{}_{}_{}.{}".format(session["login"], problem.replace(".", ""), time, submission_id, language)
+    path = os.path.join(CONFIG_PATHS["archive_dir"], problem, filename)
+    if not os.path.isfile(path):
+        return u"Невозможно получить исходный код."
+    with open(path, "r") as file:
+        source = file.read()
+    return source

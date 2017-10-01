@@ -82,7 +82,7 @@ def submit():
             return redirect(url_for("submit", error=u"Вы не можете одновременно вставить исходный код и выбрать файл."))
         elif not source_file and not source_textarea:
             return redirect(url_for("submit", error=u"Выберите файл или скопируйте исходный код в форму."))
-        filename = os.path.join(ije.config['SUBMITS_FOLDER'], ije.get_filename(problem))
+        filename = ije.get_filename(problem, language)
         if source_file:
             source_file.save(filename)
         else:
@@ -111,7 +111,8 @@ def showmessage():
             message = m
     if message is None:
         return redirect(url_for("messages", error=u"Данное сообщение не найдено."))
-    return render_template("showmessage.html", message=message)
+    source = ije.get_submission_source(message["problem"], message["id"], message["time"], message["language"])
+    return render_template("showmessage.html", message=message, source=source)
 
 
 @app.route("/monitor")
@@ -134,6 +135,12 @@ def format_time(mins):
         return "%d:%02d" % (mins // 60, mins % 60)
 
 
+def htmlsafe(source):
+    source = source.replace("\n", "</br>")
+    source = source.replace(" ", "&nbsp;")
+    return source
+
+
 def shrink_comment(comment):
     if len(comment) < 100:
         return comment
@@ -144,6 +151,7 @@ def shrink_comment(comment):
 
 
 app.jinja_env.filters['format_time'] = format_time
+app.jinja_env.filters['htmlsafe'] = htmlsafe
 app.jinja_env.filters['shrink_comment'] = shrink_comment
 app.jinja_env.filters['get_contest_time'] = get_contest_time
 

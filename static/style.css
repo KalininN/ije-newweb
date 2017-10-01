@@ -93,6 +93,10 @@ tr.message.WA td {
     background-color: #ffaaaa;
 }
 
+tr.message.RE td {
+    background-color: #661111;
+}
+
 tr.message.AC td, tr.message.OK td {
     background-color: #aaffaa;
 }
@@ -121,6 +125,10 @@ tr.message.WA:hover td {
     background-color: #ffbbbb;
 }
 
+tr.message.RE:hover td {
+    background-color: #662222;
+}
+
 tr.message.AC:hover td, tr.message.OK:hover td {
     background-color: #bbffbb;
 }
@@ -141,7 +149,11 @@ tr.message.PE:hover td {
     background-color: #88ffff;
 }
 
-tr.message td.time, tr.message td.verdict {
+tr.message td.verdict, tr.message td.test {
+    text-align: center;
+}
+
+tr.message td.time {
     text-align: right;
 }
 
@@ -237,4 +249,8 @@ table#results {
 h2 {
     padding-left: 30px;
     font-size: 150%;
+}
+
+#message_info .comment .value, #message_info .source_code .value {
+    font-family: Courier;
 }

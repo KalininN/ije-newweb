@@ -1,6 +1,9 @@
 # ije xmls
 *.xml
 results/
+archive/
+sols_acm_reg/
+flask_run.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
