@@ -136,7 +136,12 @@ def format_time(mins):
 
 
 def htmlsafe(source):
+    source = source.replace("&", "&amp;")
+    source = source.replace("\"", "&quot;")
+    source = source.replace("<", "&lt;")
+    source = source.replace(">", "&gt;")
     source = source.replace("\n", "</br>")
+    source = source.replace("\t", "&nbsp;" * 4)
     source = source.replace(" ", "&nbsp;")
     return source
 
