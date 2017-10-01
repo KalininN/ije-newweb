@@ -203,6 +203,7 @@ def replace_pattern(pattern, c, fill):
         fill = "0" * (need_len - len(fill)) + fill
     if len(fill) > need_len:
         fill = fill[(len(fill) - need_len):]
+    assert(need_len == len(fill))
     return pattern.replace(c * need_len, fill)
 
 
@@ -215,9 +216,20 @@ def get_filename(problem, language):
     return os.path.join(CONFIG_PATHS["solutions_dir"], pattern + "." + language)
 
 
+def get_filename_archive(problem, submission_id, time, language):
+    ije_xml = parse_xml(CONFIG_PATHS["ije"])
+    pattern = ije_xml.get("acm-solutions-format")
+    pattern = replace_pattern(pattern, "@", session["login"])
+    pattern = replace_pattern(pattern, "#", problem.split(".")[0])
+    pattern = replace_pattern(pattern, "$", problem.split(".")[1])
+    pattern = replace_pattern(pattern, "%", str(time))
+    pattern = replace_pattern(pattern, "^", str(submission_id))
+    return os.path.join(CONFIG_PATHS["archive_dir"], problem, pattern + "." + language)
+
+
 def get_submission_source(problem, submission_id, time, language):
-    filename = "{}_{}_{}_{}.{}".format(session["login"], problem.replace(".", ""), time, submission_id, language)
-    path = os.path.join(CONFIG_PATHS["archive_dir"], problem, filename)
+    path = get_filename_archive(problem, submission_id, time, language)
+    print(path)
     if not os.path.isfile(path):
         return u"Невозможно получить исходный код."
     with open(path, "r") as file:
