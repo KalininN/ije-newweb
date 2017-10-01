@@ -203,7 +203,6 @@ def replace_pattern(pattern, c, fill):
         fill = "0" * (need_len - len(fill)) + fill
     if len(fill) > need_len:
         fill = fill[(len(fill) - need_len):]
-    assert(need_len == len(fill))
     return pattern.replace(c * need_len, fill)
 
 
@@ -229,7 +228,6 @@ def get_filename_archive(problem, submission_id, time, language):
 
 def get_submission_source(problem, submission_id, time, language):
     path = get_filename_archive(problem, submission_id, time, language)
-    print(path)
     if not os.path.isfile(path):
         return u"Невозможно получить исходный код."
     with open(path, "r") as file:

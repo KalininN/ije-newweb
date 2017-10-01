@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title>{% block title %}IJE &mdash; the Integrated Judjing Environment{% endblock %}</title>
+    <title>{% block title %}IJE &mdash; the Integrated Judging Environment{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="/static/style.css">
 </head>
 <body>
@@ -12,7 +12,7 @@
 {% if "contest" in session %}
 {{ session["contest_name"] }}
 {% else %}
-No contest selected
+Контест не выбран
 {% endif %}
 </span>
 <span>
@@ -25,7 +25,7 @@ No contest selected
 </div>
 <div id="menu" class="container">
 <span><a href="/">Информация</a></span>
-<span><a href="/submit">Сдать</a></span>
+<span><a href="/submit">Отослать</a></span>
 <span><a href="/monitor">Результаты</a></span>
 <span><a href="/messages">Сообщения</a></span>
 <span>

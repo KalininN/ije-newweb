@@ -11,6 +11,10 @@ div.container {
     align-items: baseline;
 }
 
+a {
+    text-decoration: none;
+}
+
 a:visited {
     color: rgb(0, 0, 238);
 }
