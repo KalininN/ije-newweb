@@ -18,7 +18,7 @@
         <td class="language">{{ message["language"] }}</td>
         <td class="verdict">{{ message["verdict"] }}</td>
         <td class="test">{{ message["test"] }}</td>
-        <td class="comment">{{ message["comment"]|shrink_comment|htmlsafe|safe }}</td>
+        <td class="comment">{{ message["comment"]|shrink_comment|htmlsafe|escape }}</td>
     </tr>
 {% endfor %}
 </table>
