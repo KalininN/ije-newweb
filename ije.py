@@ -60,6 +60,7 @@ to_short_verdict = {
     "memory-limit-exceeded": "ML",
     "compilation-error": "CE",
     "runtime-error": "RE",
+    "security-violation": "SV",
     "not-tested": "NT",
     "fail": "FL",
 }
