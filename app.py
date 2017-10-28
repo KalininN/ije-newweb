@@ -3,7 +3,7 @@ import os
 from flask import Flask
 app = Flask(__name__)
 
-from flask import session, redirect, url_for, escape, request
+from flask import session, redirect, url_for, escape, request, send_file
 from flask import render_template
 
 
@@ -122,6 +122,13 @@ def monitor():
     problems = ije.problems_list()
     results = ije.get_results()
     return render_template("monitor.html", problems=problems, results=results)
+
+
+@app.route("/statements")
+def statements():
+    if not ije.can_view_statements():
+        return redirect(url_for("index", error=u"Условия недоступны."))
+    return send_file(ije.get_statements_filename())
 
 
 def get_contest_time(smth):

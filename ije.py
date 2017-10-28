@@ -101,6 +101,19 @@ def can_view_monitor():
     return "contest" in session
 
 
+def can_view_statements():
+    if not "contest" in session:
+        return False
+    return int(get_contest_time()) >= 0
+
+
+def get_statements_filename():
+    assert("contest" in session)
+    contest_xml = get_contest_config()
+    filename = contest_xml.attrib["statements"]
+    return filename
+
+
 def get_results():
     contest_xml = get_contest_config()
     results_xml = parse_xml(os.path.join(CONFIG_PATHS["results_dir"], contest_xml.attrib["monitor"]))
