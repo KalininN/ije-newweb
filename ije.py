@@ -84,7 +84,7 @@ def get_messages():
                             "time": int(submit_xml.attrib["time"]), "verdict": to_short_verdict[submit_xml.attrib["outcome"]],
                             "comment": comment, "language": submit_xml.attrib["language-id"],
                             "test": test})
-    submits = sorted(submits, key=itemgetter("time"), reverse=True)
+    submits = sorted(submits, key=itemgetter("id"), reverse=True)
     return submits
     #return [{"problem": "01.A", "id": "5", "time": 55, "verdict": "WA", "comment": "2nd nummbers differ"},
             #{"problem": "01.B", "id": "5", "time": 65, "verdict": "AC", "comment": ""}]
