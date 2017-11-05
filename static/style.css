@@ -258,3 +258,55 @@ h2 {
 #message_info .comment .value, #message_info .source_code .value {
     font-family: Courier;
 }
+
+.button {
+    font-size: 80%;    
+    border: 0;
+    background-color: #ccbbcc;
+    border-radius: 4px;
+}
+
+.button:hover {
+    font-size: 80%;    
+    border: 1px solid #ccbbcc;
+    background-color: #ddccdd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+select {
+    font-size: 80%;    
+    border: 0;
+    background-color: #ccbbcc;
+    border-radius: 4px;
+}
+
+select:hover {
+    font-size: 80%;    
+    border: 1px solid #ccbbcc;
+    background-color: #ddccdd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input, textarea {
+    font-size: 80%;    
+    border: 0;
+    background-color: #f5e5f5;
+    border-radius: 4px;
+    padding: 3px;
+}
+
+input[type=file]::-webkit-file-upload-button {
+    border: 0;
+    background-color: #ccbbcc;
+    border-radius: 4px;
+}
+
+input[type=file]::-webkit-file-upload-button:hover {
+    border: 1px solid #ccbbcc;
+    background-color: #ddccdd;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
