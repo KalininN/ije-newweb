@@ -5,7 +5,7 @@
     <div><span class="property">Задача:</span><span class="value">
     <select name="problem">
         {% for p in problems %}
-        <option value={{ p["id"] }}>{{ p["name"] }}</option>
+        <option value={{ p["id"] }}>{{ p["id"] }}: {{ p["name"] }}</option>
         {% endfor %}
     </select>
     </span>
