@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 from flask import session, redirect, url_for, escape, request, send_file
 from flask import render_template
+import jinja2
 
 
 import ije
@@ -131,7 +132,8 @@ def statements():
     return send_file(ije.get_statements_filename())
 
 
-def get_contest_time(smth):
+@jinja2.contextfilter
+def get_contest_time(context, smth):
     return ije.get_contest_status_time()
 
 
