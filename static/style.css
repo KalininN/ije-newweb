@@ -261,7 +261,7 @@ h2 {
 
 .button {
     font-size: 80%;    
-    border: 0;
+    border: 1px solid #ccbbcc;
     background-color: #ccbbcc;
     border-radius: 4px;
 }
@@ -276,7 +276,7 @@ h2 {
 
 select {
     font-size: 80%;    
-    border: 0;
+    border: 1px solid #ccbbcc;
     background-color: #ccbbcc;
     border-radius: 4px;
 }
@@ -298,7 +298,7 @@ input, textarea {
 }
 
 input[type=file]::-webkit-file-upload-button {
-    border: 0;
+    border: 1px solid #ccbbcc;
     background-color: #ccbbcc;
     border-radius: 4px;
 }
